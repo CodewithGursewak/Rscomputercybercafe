@@ -101,7 +101,7 @@ export default function AboutPage({ setActivePage }) {
           <div className="lg:col-span-6">
             <div className="relative rounded-3xl overflow-hidden border border-blue-800/50 shadow-2xl shadow-blue-950">
               <img
-                src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80"
+                src="https://res.cloudinary.com/e8wyohlx/image/upload/v1788781360/Screenshot_2026-09-07_171017_xrgdtl.png"
                 alt="RS Computer Cyber Cafe Center"
                 className="w-full h-[380px] object-cover"
               />
