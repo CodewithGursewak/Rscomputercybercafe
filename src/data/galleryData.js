@@ -5,7 +5,7 @@ export const galleryItems = [
     id: 1,
     title: "High-Performance Workstation Row",
     category: "Workstations",
-    tag: "300 Mbps Fiber",
+    
     image: "https://res.cloudinary.com/e8wyohlx/image/upload/v1788853783/WhatsApp_Image_2026-09-08_at_1.18.29_PM_lt8jje.jpg",
     description: "Equipped with curved 27-inch 144Hz monitors, mechanical RGB keyboards, and ultra-fast Gigabit optical fiber."
   },
