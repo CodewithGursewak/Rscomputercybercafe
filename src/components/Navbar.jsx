@@ -7,6 +7,7 @@ export default function Navbar({ activePage, setActivePage }) {
   const navItems = [
     { id: 'home', label: 'Home' },
     { id: 'services', label: 'Services' },
+    { id: 'verify-certificate', label: 'Verify Certificate' },
     { id: 'pricing', label: 'Pricing' },
     { id: 'gallery', label: 'Gallery' },
     { id: 'about', label: 'About' },
@@ -34,6 +35,7 @@ export default function Navbar({ activePage, setActivePage }) {
             onClick={() => handleNavClick('home')}
             className="flex items-center gap-3 cursor-pointer group select-none"
           >
+            {/* Stylized RS Emblem */}
             <div className="relative flex items-center justify-center">
               <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-600 via-sky-500 to-indigo-600 p-[1.5px] shadow-lg shadow-sky-500/20 group-hover:shadow-sky-500/40 transition-shadow">
                 <div className="w-full h-full bg-[#070e24] rounded-[10px] flex items-center justify-center">
@@ -44,6 +46,7 @@ export default function Navbar({ activePage, setActivePage }) {
               </div>
             </div>
 
+            {/* Brand Title */}
             <div className="flex flex-col">
               <span className="font-extrabold text-white text-lg tracking-wide leading-tight group-hover:text-sky-300 transition-colors">
                 RS COMPUTER
@@ -54,7 +57,7 @@ export default function Navbar({ activePage, setActivePage }) {
             </div>
           </div>
 
-          {/* Desktop Navigation Links */}
+          {/* Desktop Navigation Links (Original 6 links) */}
           <nav className="hidden md:flex items-center space-x-1 lg:space-x-2">
             {navItems.map((item) => {
               const isActive = activePage === item.id;
@@ -69,6 +72,7 @@ export default function Navbar({ activePage, setActivePage }) {
                   }`}
                 >
                   {item.label}
+                  {/* Active Indicator Underline */}
                   {isActive && (
                     <span className="absolute bottom-0 left-3 right-3 h-[2.5px] bg-gradient-to-r from-sky-400 to-blue-500 rounded-full shadow-[0_0_8px_#38bdf8]" />
                   )}
@@ -77,7 +81,7 @@ export default function Navbar({ activePage, setActivePage }) {
             })}
           </nav>
 
-          {/* Top Right Action: Sirf WhatsApp Us Button */}
+          {/* Top Right Action: Only WhatsApp Us Button (Matching exact UI) */}
           <div className="hidden sm:flex items-center gap-3">
             <button
               onClick={openWhatsApp}
@@ -88,18 +92,18 @@ export default function Navbar({ activePage, setActivePage }) {
             </button>
           </div>
 
-          {/* Mobile Menu Toggle */}
+          {/* Mobile Hamburger Menu Toggle */}
           <div className="flex md:hidden items-center gap-2">
             <button
               onClick={openWhatsApp}
-              className="p-2 rounded-lg bg-blue-600/30 text-sky-400 border border-blue-500/30"
+              className="p-2 rounded-lg bg-blue-600/30 text-sky-400 border border-blue-500/30 hover:bg-blue-600/50"
               title="WhatsApp Us"
             >
               <IconWhatsApp className="w-4 h-4" />
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-slate-300 hover:text-white"
+              className="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-blue-900/30 focus:outline-none cursor-pointer"
             >
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 {mobileMenuOpen ? (
@@ -116,15 +120,22 @@ export default function Navbar({ activePage, setActivePage }) {
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
         <div className="md:hidden bg-[#070e24] border-b border-blue-900/50 px-4 pt-2 pb-5 space-y-2">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => handleNavClick(item.id)}
-              className="w-full text-left px-4 py-2.5 rounded-lg text-sm text-slate-300 hover:bg-blue-950/40 hover:text-white"
-            >
-              {item.label}
-            </button>
-          ))}
+          {navItems.map((item) => {
+            const isActive = activePage === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => handleNavClick(item.id)}
+                className={`w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                  isActive
+                    ? 'bg-blue-600/20 text-sky-400 border-l-4 border-sky-400 font-semibold'
+                    : 'text-slate-300 hover:bg-blue-950/40 hover:text-white'
+                }`}
+              >
+                {item.label}
+              </button>
+            );
+          })}
           <div className="pt-2">
             <button
               onClick={openWhatsApp}

@@ -5,6 +5,7 @@ export default function Footer({ setActivePage, onOpenAdminLogin, isAdminLoggedI
   const quickLinks = [
     { id: 'home', label: 'Home' },
     { id: 'services', label: 'All Services' },
+    { id: 'verify-certificate', label: 'Verify Certificate' },
     { id: 'pricing', label: 'Pricing Calculator' },
     { id: 'gallery', label: 'Photo Gallery' },
     { id: 'about', label: 'About Center' },
@@ -99,11 +100,11 @@ export default function Footer({ setActivePage, onOpenAdminLogin, isAdminLoggedI
             <div className="space-y-2.5 text-xs text-slate-300">
               <p className="flex items-start gap-2">
                 <span className="text-sky-400 font-bold">📍</span>
-                <span>Bhore, nabha, Punjab 147201</span>
+                <span>Bhore, nabha, Punjab 147201 </span>
               </p>
               <p className="flex items-center gap-2">
                 <span className="text-sky-400 font-bold">📞</span>
-                <span>+91 90230 60244 / +91</span>
+                <span>+91 90230 60244</span>
               </p>
               <p className="flex items-center gap-2">
                 <span className="text-sky-400 font-bold">✉️</span>

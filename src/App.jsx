@@ -10,23 +10,43 @@ import PricingPage from './pages/PricingPage';
 import GalleryPage from './pages/GalleryPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
+import VerifyCertificatePage from './pages/VerifyCertificatepage';
 import { allServices, quickServices } from './data/serviceData';
 import { IconWhatsApp } from './components/Icons';
 
 export default function App() {
   const [activePage, setActivePage] = useState('home');
   const [selectedService, setSelectedService] = useState(null);
+  const [initialCertId, setInitialCertId] = useState('');
 
   // Admin authentication and view states
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
   const [showAdminLoginModal, setShowAdminLoginModal] = useState(false);
   const [currentView, setCurrentView] = useState('public'); // 'public' | 'admin'
 
-  // Check persisted session on load
+  // Check persisted session on load & listen for certificate URL params/hashes
   useEffect(() => {
     const persisted = localStorage.getItem('rs_admin_logged_in');
     if (persisted === 'true') {
       setIsAdminLoggedIn(true);
+    }
+
+    // Auto-navigate to verify page if ?cert= or #verify is passed
+    try {
+      const searchParams = new URLSearchParams(window.location.search);
+      const certParam = searchParams.get('cert') || searchParams.get('verify') || searchParams.get('id');
+      if (certParam) {
+        setInitialCertId(certParam);
+        setActivePage('verify-certificate');
+      } else if (window.location.hash === '#verify' || window.location.hash.startsWith('#RSCC')) {
+        const hashVal = window.location.hash.replace('#', '');
+        if (hashVal.startsWith('RSCC')) {
+          setInitialCertId(hashVal);
+        }
+        setActivePage('verify-certificate');
+      }
+    } catch (e) {
+      // ignore
     }
   }, []);
 
@@ -37,8 +57,8 @@ export default function App() {
 
   // Handler for opening service modal from any page
   const handleSelectService = (serviceId) => {
-    const found = allServices?.find((s) => s.id === serviceId) ||
-                  quickServices?.find((s) => s.id === serviceId);
+    const found = allServices.find((s) => s.id === serviceId) ||
+                  quickServices.find((s) => s.id === serviceId);
     if (found) {
       setSelectedService(found);
     }
@@ -47,7 +67,7 @@ export default function App() {
   // Direct WhatsApp click
   const handleFloatingWhatsApp = () => {
     const text = encodeURIComponent("Hello RS Computer Cyber Cafe! I would like to inquire about your services.");
-    window.open(`https://wa.me/919023060244?text=${text}`, '_blank');
+    window.open(`https://wa.me/9023060244?text=${text}`, '_blank');
   };
 
   // Admin handlers
@@ -85,12 +105,10 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#040817] text-slate-100 flex flex-col font-sans selection:bg-sky-500 selection:text-white">
       
-      {/* Top Navigation Bar with Admin Button */}
+      {/* Top Navigation Bar */}
       <Navbar
         activePage={activePage}
         setActivePage={setActivePage}
-        isAdminLoggedIn={isAdminLoggedIn}
-        onOpenAdminLogin={handleOpenAdminLogin}
       />
 
       {/* Main Content Pages */}
@@ -122,12 +140,19 @@ export default function App() {
           />
         )}
 
+        {activePage === 'verify-certificate' && (
+          <VerifyCertificatePage
+            initialCertId={initialCertId}
+            onNavigate={setActivePage}
+          />
+        )}
+
         {activePage === 'contact' && (
           <ContactPage />
         )}
       </main>
 
-      {/* Global Footer with Admin Button at the end */}
+      {/* Global Footer with Admin Button */}
       <Footer
         setActivePage={setActivePage}
         onOpenAdminLogin={handleOpenAdminLogin}

@@ -1,7 +1,7 @@
 import React from 'react';
 import QuickServicesBar from '../components/QuickServicesBar';
-import StatsBanner from "../components/StatsBanner";
-import { allServices } from '../data/serviceData';
+import StatsBanner from '../components/StatsBanner';
+import { allServices } from "../data/serviceData";
 import {
   IconArrowRight,
   IconChevronRight,
@@ -24,7 +24,8 @@ import {
   IconPhotoEdit,
   IconResume,
   IconPdf,
-  IconComputer
+  IconComputer,
+  IconCertificate
 } from '../components/Icons';
 
 export default function HomePage({ setActivePage, onSelectService }) {
@@ -147,7 +148,7 @@ export default function HomePage({ setActivePage, onSelectService }) {
                 
                 {/* Visual Image */}
                 <img
-                  src="https://res.cloudinary.com/e8wyohlx/image/upload/v1788781360/Screenshot_2026-09-07_171017_xrgdtl.png"
+                  src="https://res.cloudinary.com/e8wyohlx/image/upload/v1788853783/WhatsApp_Image_2026-09-08_at_1.18.29_PM_lt8jje.jpg"
                   alt="RS Computer Cyber Cafe Interior"
                   className="w-full h-[320px] sm:h-[400px] object-cover transition-transform duration-700 group-hover:scale-105"
                 />
@@ -186,6 +187,44 @@ export default function HomePage({ setActivePage, onSelectService }) {
 
       {/* ===================== QUICK SERVICES FLOATING STRIP ===================== */}
       <QuickServicesBar onSelectService={onSelectService} />
+
+      {/* ===================== CERTIFICATE VERIFICATION CALLOUT BANNER ===================== */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#071333] via-[#09183d] to-[#071333] border border-cyan-500/30 p-6 sm:p-8 shadow-[0_0_40px_rgba(6,182,212,0.15)] flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="absolute top-0 right-0 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+          
+          <div className="flex items-center gap-4 sm:gap-5 z-10">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-400 shrink-0 shadow-[0_0_20px_rgba(6,182,212,0.3)]">
+              <IconCertificate className="w-8 h-8" />
+            </div>
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-[10px] font-bold uppercase tracking-wider mb-1.5">
+                Official Tracking Portal
+              </div>
+              <h3 className="text-xl sm:text-2xl font-black text-white">
+                Verify Your Certificate Status Online
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-xl">
+                Have a Certificate ID from RS Computer Cyber Cafe? Enter your unique tracking number to verify validity and download documents.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3 z-10 w-full md:w-auto shrink-0">
+            <button
+              onClick={() => {
+                setActivePage('verify-certificate');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="w-full md:w-auto px-6 py-3.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-sm shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap"
+            >
+              <IconCertificate className="w-4 h-4" />
+              <span>Verify Certificate Now</span>
+              <IconArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      </section>
 
       {/* ===================== OUR SERVICES SECTION ===================== */}
       <section className="py-20 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -391,7 +430,7 @@ export default function HomePage({ setActivePage, onSelectService }) {
             <div className="lg:col-span-6">
               <div className="relative rounded-2xl overflow-hidden border border-blue-800/40 shadow-2xl shadow-blue-950/80 group">
                 <img
-                  src="https://res.cloudinary.com/e8wyohlx/image/upload/v1788781695/ChatGPT_Image_Sep_7_2026_05_17_45_PM_chjeck.png"
+                  src="https://res.cloudinary.com/e8wyohlx/image/upload/v1788781360/Screenshot_2026-09-07_171017_xrgdtl.png"
                   alt="Digital Services Made Easy Desk"
                   className="w-full h-[280px] sm:h-[350px] object-cover transition-transform duration-700 group-hover:scale-105"
                 />
